@@ -1,0 +1,21 @@
+[main]
+logdir=<%= @logdir %>
+vardir=<%= @vardir %>
+ssldir=<%= @ssldir %>
+rundir=<%= @rundir %>
+factpath=<%= @factpath %>
+templatedir=<%= @templatedir %>
+
+<% if @manifestdir != 'UNDEFINED' -%>
+manifestdir = <%= @manifestdir %>
+<% end -%>
+<% if @modulepath != 'UNDEFINED' -%>
+modulepath = <%= @modulepath %>
+<% end -%>
+
+<% if @node_terminus != 'UNDEFINED' -%>
+node_terminus = <%= @node_terminus %>
+<% end -%>
+<% if @external_nodes != 'UNDEFINED' -%>
+external_nodes = <%= @external_nodes %>
+<% end -%>

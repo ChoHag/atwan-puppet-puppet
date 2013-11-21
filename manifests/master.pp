@@ -1,28 +1,11 @@
-class puppet::master inherits puppet {
-  case $::osfamily {
-    debian: {
-      $puppetmaster_package = 'puppetmaster'
-    }
+class puppet::master(
+  $package = params_lookup('master_package'),
+) inherits puppet::params {
+  include puppet
 
-    redhat: {
-      $puppetmaster_package = 'puppet-server'
-    }
-  }
-
-  file {
-    '/etc/puppet/fileserver.conf':
-      ensure  => file,
-      content => '',
-  }
-
-  -> package {
-    $puppetmaster_package:
-      ensure => installed,
-  }
-
-  -> service {
-    'puppetmaster':
-      enable  => true,
-      ensure  => running,
-  }
+     class { 'puppet::master::install': }
+  -> class { 'puppet::master::config': }
+  -> class { 'puppet::master::service': }
+  -> Class['puppet::master']
+  -> Class['puppet']
 }
